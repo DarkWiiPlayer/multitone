@@ -1,11 +1,13 @@
 [Multitone](https://github.com/darkwiiplayer/multitone)
 =========
 
-Improved version of my duotone script
+Improved version of my duotone script. It generates an SVG element with a svg-filter that can be applied to any other HTML element. When called with two colours, it generates a duotone effect. More colours can be used as well.
 
 - Ported to [moonxml](https//github.com/darkwiiplayer/moonxml)
 - Extended to support more than two colors (thus renamed duotone -> multitone)
 - Parsing of colors removed *because useless*™
+
+Here's a showcase of the effect: [codepen.io/darkwiiplayer/pen/EpxXmL](https://codepen.io/darkwiiplayer/pen/EpxXmL)
 
 Usage
 -----
