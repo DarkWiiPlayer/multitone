@@ -10,7 +10,7 @@ local normalize
 normalize = function(color)
   return format('%1.4f', min(255, max(0, color)) / 255)
 end
-local multitone = xml(function(...)
+local generate = xml(function(...)
   local colors = {
     ...
   }
@@ -59,3 +59,6 @@ local multitone = xml(function(...)
     end)
   end)
 end)
+return {
+  generate = generate
+}

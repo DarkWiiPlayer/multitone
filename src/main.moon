@@ -5,7 +5,7 @@ import format from string
 normalize = (color) ->
   format '%1.4f', min(255, max 0, color)/255
 
-multitone = xml (...) ->
+generate = xml (...) ->
   colors = {...}
   concat = (t) -> table.concat t, ' '
   svg {
@@ -24,3 +24,5 @@ multitone = xml (...) ->
         for idx,func in ipairs{feFuncR, feFuncG, feFuncB}
           func type: 'table', tableValues:
             concat [normalize color[idx] for color in *colors]
+
+{:generate}
