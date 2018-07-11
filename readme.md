@@ -7,7 +7,7 @@ Improved version of my duotone script. It generates an SVG element with a svg-fi
 - Extended to support more than two colors (thus renamed duotone -> multitone)
 - Parsing of colors removed *because useless*™
 
-Here's a showcase of the effect: [codepen.io/darkwiiplayer/pen/EpxXmL](https://codepen.io/darkwiiplayer/details/EpxXmL)
+Here's a showcase of the effect: [codepen.io/darkwiiplayer/details/vaEKNQ](https://codepen.io/darkwiiplayer/details/vaEKNQ/)
 
 Usage
 -----
