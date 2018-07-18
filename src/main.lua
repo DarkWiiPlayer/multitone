@@ -27,9 +27,9 @@ local generate = xml(function(...)
       feColorMatrix({
         type = 'matrix',
         values = concat({
-          '1 0 0 0 0',
-          '1 0 0 0 0',
-          '1 0 0 0 0',
+          '.375 .5 .125 0 0',
+          '.375 .5 .125 0 0',
+          '.375 .5 .125 0 0',
           '0 0 0 1 0'
         })
       })
