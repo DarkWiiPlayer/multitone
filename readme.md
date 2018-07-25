@@ -15,5 +15,6 @@ Usage
 	require'multitone'.generate(print, {20, 10, 10}, {200, 100, 100}, {80, 100, 200})
 
 Exposes a single function that takes an output function followed by an arbitrary number of RGB colors represented by 3-tuples (Sequences of length 3). Colour values are interpreted in 0...255 and are clamped to that range.
+Any table of size 0 is treated as an options table. So far the only recognized option is 'id', for the ID of the filter.
 
 License: [The Unlicense](license.md)
