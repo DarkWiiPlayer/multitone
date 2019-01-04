@@ -21,6 +21,6 @@ dependencies = {
 build = {
 	type = "builtin";
 	modules = {
-		multitone = "src/main.lua"
+		multitone = "multitone.lua"
 	};
 }
