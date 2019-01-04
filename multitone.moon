@@ -31,4 +31,16 @@ generator = (...) ->
           func type: 'table', tableValues:
             concat [normalize color[idx] for color in *colors]
 
-{generate: (...) -> moonxml.xml\hack(generator, ...)}
+buffer = ->
+	b = {}
+	((str) -> table.insert(b, str)), (-> table.concat(b, '\n'))
+
+lang = moonxml.xml\derive!
+
+{
+	generate: (...) ->
+		insert, result = buffer!
+		lang.environment.print = insert
+		lang\hack(generator, ...)
+		result!
+}

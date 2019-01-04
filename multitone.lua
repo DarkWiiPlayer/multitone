@@ -90,8 +90,21 @@ generator = function(...)
     end)
   end)
 end
+local buffer
+buffer = function()
+  local b = { }
+  return (function(str)
+    return table.insert(b, str)
+  end), (function()
+    return table.concat(b, '\n')
+  end)
+end
+local lang = moonxml.xml:derive()
 return {
   generate = function(...)
-    return moonxml.xml:hack(generator, ...)
+    local insert, result = buffer()
+    lang.environment.print = insert
+    lang:hack(generator, ...)
+    return result()
   end
 }
