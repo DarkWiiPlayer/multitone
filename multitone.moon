@@ -7,7 +7,7 @@ normalize = (color) ->
 
 generator = (...) ->
   args    = {...}
-  colors  = [tab for tab in *args when #tab==3]
+  colors  = [tab for tab in *args when #tab>=3]
   options = [tab for tab in *args when #tab==0]
   options = options[#options] or {}
   concat  = (t) -> table.concat t, ' '
@@ -24,19 +24,18 @@ generator = (...) ->
         '.375 .500 .125 0 0'
         '.375 .500 .125 0 0'
         '.375 .500 .125 0 0'
-        '0 0 0 1 0'
+        options.alpha and '.375 .500 .125 0 0' or '0 0 0 1 0'
       }
       feComponentTransfer {['color-interpolation-filter']: 'sRGB'}, ->
-        for idx,func in ipairs{feFuncR, feFuncG, feFuncB}
+        for idx,func in ipairs{feFuncR, feFuncG, feFuncB, (options.alpha and feFuncA or nil)}
           func type: 'table', tableValues:
-            concat [normalize color[idx] for color in *colors]
+            concat [normalize(color[idx] or 255) for color in *colors]
 
 buffer = ->
 	b = {}
 	((str) -> table.insert(b, str)), (-> table.concat(b, '\n'))
 
 lang = moonxml.xml\derive!
-
 {
 	generate: (...) ->
 		insert, result = buffer!

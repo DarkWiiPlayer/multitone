@@ -21,7 +21,7 @@ generator = function(...)
     local _len_0 = 1
     for _index_0 = 1, #args do
       local tab = args[_index_0]
-      if #tab == 3 then
+      if #tab >= 3 then
         _accum_0[_len_0] = tab
         _len_0 = _len_0 + 1
       end
@@ -61,7 +61,7 @@ generator = function(...)
           '.375 .500 .125 0 0',
           '.375 .500 .125 0 0',
           '.375 .500 .125 0 0',
-          '0 0 0 1 0'
+          options.alpha and '.375 .500 .125 0 0' or '0 0 0 1 0'
         })
       })
       return feComponentTransfer({
@@ -70,7 +70,8 @@ generator = function(...)
         for idx, func in ipairs({
           feFuncR,
           feFuncG,
-          feFuncB
+          feFuncB,
+          (options.alpha and feFuncA or nil)
         }) do
           func({
             type = 'table',
@@ -79,7 +80,7 @@ generator = function(...)
               local _len_0 = 1
               for _index_0 = 1, #colors do
                 local color = colors[_index_0]
-                _accum_0[_len_0] = normalize(color[idx])
+                _accum_0[_len_0] = normalize(color[idx] or 255)
                 _len_0 = _len_0 + 1
               end
               return _accum_0
