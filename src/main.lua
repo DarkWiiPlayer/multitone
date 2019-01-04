@@ -1,4 +1,4 @@
-local xml = require('moonxml').build
+local moonxml = require('moonxml')
 local max, min
 do
   local _obj_0 = math
@@ -10,7 +10,8 @@ local normalize
 normalize = function(color)
   return format('%1.4f', min(255, max(0, color)) / 255)
 end
-local generate = xml(function(...)
+local generator
+generator = function(...)
   local args = {
     ...
   }
@@ -48,7 +49,8 @@ local generate = xml(function(...)
   return svg({
     xmlns = 'http://www.w3.org/2000/svg',
     width = 0,
-    height = 0
+    height = 0,
+    class = options.class or 'multitone'
   }, function()
     return filter({
       id = options.id or 'multitone'
@@ -59,7 +61,7 @@ local generate = xml(function(...)
           '.375 .500 .125 0 0',
           '.375 .500 .125 0 0',
           '.375 .500 .125 0 0',
-          ' 0    0    0   1 0'
+          '0 0 0 1 0'
         })
       })
       return feComponentTransfer({
@@ -87,7 +89,9 @@ local generate = xml(function(...)
       end)
     end)
   end)
-end)
+end
 return {
-  generate = generate
+  generate = function(...)
+    return moonxml.xml:hack(generator, ...)
+  end
 }
