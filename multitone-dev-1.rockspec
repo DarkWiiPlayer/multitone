@@ -15,7 +15,8 @@ description = {
 }
 dependencies = {
 	"lua >= 5.1";
-	"moonxml >= 1.1.0";
+	"moonxml ~> 3";
+	"moonxml >= 3.2.0"
 }
 build = {
 	type = "builtin";
