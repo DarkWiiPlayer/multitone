@@ -1,7 +1,10 @@
 [Multitone](https://github.com/darkwiiplayer/multitone)
 =========
 
-Improved version of my duotone script. It generates an SVG element with a svg-filter that can be applied to any other HTML element. When called with two colours, it generates a duotone effect. More colours can be used as well.
+Improved version of my duotone script.
+It generates an SVG element with a svg-filter that can be applied to any other HTML element.
+When called with two colours, it generates a duotone effect.
+More colours can be used as well.
 
 - Ported to [moonxml](https://github.com/darkwiiplayer/moonxml)
 - Extended to support more than two colors (thus renamed duotone -> multitone)
@@ -12,21 +15,28 @@ Here's a showcase of the effect: [codepen.io/darkwiiplayer/details/vaEKNQ](https
 Usage
 -----
 
-	require'multitone'.generate(print, {20, 10, 10}, {200, 100, 100}, {80, 100, 200})
+The repository provides both a JavaScript and a Lua implementation of the
+multitone filter generator. Both versions of the generator follow the same API
+and generate the same filter for equal input.
+The Lua version returns a string of SVG code representing the filter.
+The JavaScript version returns an SVG Dom node.
 
-`generate` accepts a list of colours (sequences of 3 or more values) and an
-options table. Color values must range from 0 to 255 and an alpha value may be
-supplied as the fourth element.
+The generator accepts an ID to be applied to the filter element and a list of
+colours represented as 3-tuples of values between 0 and 1 representing the RGB
+colour channels. Out-of-range values will be clamped.
 
-Valid options are:
+The filter will first map the input colour to its luminosity as a value between
+black and white, then map this black-white gradient to a gradient where each of
+the input colours represents a colour stop.
 
-id: the id of the filter element [multitone]
+### Lua Usage
 
-class: the class of the svg element [multitone]
+	local multitone = require('multitone')
+	multitone("multitone", {0, 0, 1}, {0, 1, 1})
 
-alpha: controls whether alpha channel treated like a color [false]
+### JS Usage
 
-Exposes a single function that takes an output function followed by an arbitrary number of RGB colors represented by 3-tuples (Sequences of length 3). Colour values are interpreted in 0...255 and are clamped to that range.
-Any table of size 0 is treated as an options table. So far the only recognized option is 'id', for the ID of the filter.
+	import multitone from 'multitone'
+	let filter = multitone("multitone", [0, 0, 1], [0, 1, 1])
 
 License: [The Unlicense](license.md)
